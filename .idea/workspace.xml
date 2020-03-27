@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="40a06729-2c0b-4dea-8081-1fdff58a54ea" name="Default" comment="20200224">
+    <list default="true" id="40a06729-2c0b-4dea-8081-1fdff58a54ea" name="Default" comment="20200327main.py可运行">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -173,7 +173,7 @@
       <workItem from="1583724545320" duration="716000" />
       <workItem from="1585123380694" duration="3050000" />
       <workItem from="1585207008602" duration="862000" />
-      <workItem from="1585274938028" duration="915000" />
+      <workItem from="1585274938028" duration="1458000" />
     </task>
     <task id="LOCAL-00001" summary="20200224">
       <created>1585274992083</created>
@@ -182,7 +182,14 @@
       <option name="project" value="LOCAL" />
       <updated>1585274992083</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="20200327main.py可运行">
+      <created>1585294212374</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1585294212374</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -247,13 +254,14 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="20200114" />
     <MESSAGE value="20200224" />
-    <option name="LAST_COMMIT_MESSAGE" value="20200224" />
+    <MESSAGE value="20200327main.py可运行" />
+    <option name="LAST_COMMIT_MESSAGE" value="20200327main.py可运行" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="552" y="178" key="#Deployment" timestamp="1585275046373">
+    <state x="552" y="178" key="#Deployment" timestamp="1585294439539">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="552" y="178" key="#Deployment/0.0.1920.1040@0.0.1920.1040" timestamp="1585275046373" />
+    <state x="552" y="178" key="#Deployment/0.0.1920.1040@0.0.1920.1040" timestamp="1585294439539" />
     <state x="919" y="110" width="816" height="681" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1582530672902">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -262,10 +270,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="796" y="322" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1585125115035" />
-    <state x="588" y="113" key="CommitChangelistDialog2" timestamp="1585274990078">
+    <state x="588" y="113" key="CommitChangelistDialog2" timestamp="1585294210630">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="588" y="113" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1585274990078" />
+    <state x="588" y="113" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1585294210630" />
     <state width="1877" height="282" key="GridCell.Tab.0.bottom" timestamp="1583141455745">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -302,14 +310,14 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="828" y="230" key="RollbackChangesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1582791419820" />
-    <state x="520" y="145" key="SettingsEditor" timestamp="1585294068736">
+    <state x="520" y="145" key="SettingsEditor" timestamp="1585294616875">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="520" y="145" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1585294068736" />
-    <state x="552" y="252" key="Vcs.Push.Dialog.v2" timestamp="1585294120410">
+    <state x="520" y="145" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1585294616875" />
+    <state x="552" y="252" key="Vcs.Push.Dialog.v2" timestamp="1585294484664">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="552" y="252" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1585294120410" />
+    <state x="552" y="252" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1585294484664" />
     <state x="640" y="343" key="com.intellij.ide.util.TipDialog" timestamp="1585274953948">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
