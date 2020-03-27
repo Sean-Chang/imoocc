@@ -20,6 +20,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__fil
 # sys.path.insert(0, os.path.join(os.path.dirname(PROJECT_ROOT), "site-packages"))
 sys.path.insert(0, os.path.join(BASE_DIR, 'apps'))
 sys.path.insert(0, os.path.join(BASE_DIR, 'extra_apps'))
+#print "sys path..........", sys.path
 
 
 # Quick-start development settings - unsuitable for production
@@ -94,10 +95,10 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'imoocc',
         'USER': 'imoocc',
-        'PASSWORD': 'imoocccom',
+        'PASSWORD': '123456',
         'HOST': '127.0.0.1',
         'PORT': '',
-        'OPTIONS': {},
+        'OPTIONS': {"init_command":"SET foreign_key_checks = 0;",},
         'init_command': 'SET storage_engine=INNODB,'
                         'SESSION TRANSACTION ISOLATION LEVEL READ COMMITTED, autocommit=1, names "utf8";',
     }
@@ -159,9 +160,9 @@ LOGGING = {
 }
 
 # Mongo DB
-MONGO_HOST = '192.168.1.108'
+MONGO_HOST = '192.168.1.122'
 MONGO_PORT = '27017'
 
 # Redis Con
-REDSI_KWARGS_LPUSH = {"host":'192.168.1.108','port':6379,'db':3}
+REDSI_KWARGS_LPUSH = {"host":'192.168.1.122','port':6379,'db':3}
 REDSI_LPUSH_POOL = None

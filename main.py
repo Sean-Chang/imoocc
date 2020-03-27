@@ -11,11 +11,13 @@ import re
 import yaml
 
 PROJECT_ROOT = os.path.realpath(os.path.dirname(__file__))
-# import sys
-os.environ["DJANGO_SETTINGS_MODULE"] = 'admin.settings.local_cj'
+import sys
+#os.environ["DJANGO_SETTINGS_MODULE"] = 'admin.settings.local_cj'
+os.environ["DJANGO_SETTINGS_MODULE"] = 'admin.settings.settings'
 import django
 import time
 django.setup()
+
 from scanhosts.models import HostLoginifo
 from scanhosts.util.nmap_all_server import NmapNet
 from scanhosts.util.nmap_all_server import NmapDocker
@@ -24,8 +26,8 @@ from scanhosts.util.nmap_all_server import NmapVMX
 from scanhosts.util.nmap_all_server import snmp_begin
 from scanhosts.util.j_filter import FilterRules
 from scanhosts.util.get_pv_relation import GetHostType
-from detail.models import  PhysicalServerInfo,ConnectionInfo,OtherMachineInfo,StatisticsRecord
-from operations.models import  MachineOperationsInfo
+from detail.models import PhysicalServerInfo, ConnectionInfo, OtherMachineInfo, StatisticsRecord
+from operations.models import MachineOperationsInfo
 
 from scanhosts.util.nmap_all_server import NetDevLogin
 from admin.settings.local_cj import BASE_DIR
@@ -35,14 +37,14 @@ from apps.detail.utils.machines import Machines
 
 
 
-# def net_begin():
-#     '''
-#     开始执行网络扫描
-#     :return:
-#     '''
-#     nm = NmapNet(oid='1.3.6.1.2.1.1.5.0',Version=2)
-#     nm_res = nm.query()
-#     print "...................",nm_res
+def net_begin():
+    '''
+    开始执行网络扫描
+    :return:
+    '''
+    nm = NmapNet(oid='1.3.6.1.2.1.1.5.0',Version=2)
+    nm_res = nm.query()
+    print "...................",nm_res
 
 
 
@@ -69,53 +71,52 @@ def main():
 
     d_pass = s_conf['dockerinfo']['ssh_pass']
     starttime = datetime.datetime.now()
-    # '''
-    # 扫描主机信息
-    # '''
-    # for nmap_type in s_nets:
-    #     unkown_list,key_not_login_list = snmp_begin(nmap_type,s_ports,s_pass,s_keys,s_cmds,s_blacks,s_emails)
-    #
-    # '''
-    # 扫描网络信息
-    # '''
-    # nm = NmapNet(n_sysname_oid,n_sn_oid,n_commu)
-    # if key_not_login_list:
-    #     for item in key_not_login_list:
-    #         is_net = nm.query(item)
-    #         if is_net[0] or is_net[1]:
-    #             HostLoginifo.objects.update_or_create(ip=item,hostname=is_net[0],sn=is_net[1],mathine_type="Network device")
-    #         else:
-    #             HostLoginifo.objects.update_or_create(ip=item,ssh_port=key_not_login_list[item][0],ssh_status=0)
-    #             other_sn = item.replace('.','')
-    #             ob = OtherMachineInfo.objects.filter(sn_key=other_sn)
-    #             if not ob:
-    #                 print ".........................OtherMachineInfo",item,other_sn
-    #                 OtherMachineInfo.objects.create(ip=item,sn_key=other_sn,reson_str=u"SSH端口存活，无法登录",oth_cab_id=1)
-    #
-    #
-    # if unkown_list:
-    #     for item in unkown_list:
-    #         is_net = nm.query(item)
-    #         if is_net[0] or is_net[1]:
-    #             HostLoginifo.objects.update_or_create(ip=item,hostname=is_net,mathine_type="Network device")
-    #         else:
-    #             HostLoginifo.objects.update_or_create(ip=item,ssh_status=0)
-    #             other_sn = item.replace('.','')
-    #             ob = OtherMachineInfo.objects.filter(sn_key=other_sn)
-    #             if not ob:
-    #                 OtherMachineInfo.objects.create(ip=item,sn_key=other_sn,reson_str=u"IP存活，非Linux服务器",oth_cab_id=1)
+    '''
+    扫描主机信息
+    '''
+    for nmap_type in s_nets:
+        unkown_list,key_not_login_list = snmp_begin(nmap_type,s_ports,s_pass,s_keys,s_cmds,s_blacks,s_emails)
 
-    # '''
-    # 网络设备备份或者登录功能
-    # '''
-    # net_login_dct = {}
-    # with open("%s/conf/net_dev.pass"%BASE_DIR,'r') as f:
-    #     for item in f.readlines():
-    #         ip,username,passwd,en_passwd = re.split("\s+",item)[:4]
-    #         net_login_dct[ip] = (username,passwd,en_passwd)
-    #     if n_login_sw == "True":
-    #         res = NetDevLogin(dev_ips=net_login_dct,backup_sw=n_backup_sw,back_server=n_backup_sever)
+    '''
+    扫描网络信息
+    '''
+    nm = NmapNet(n_sysname_oid,n_sn_oid,n_commu)
+    if key_not_login_list:
+        for item in key_not_login_list:
+            is_net = nm.query(item)
+            if is_net[0] or is_net[1]:
+                HostLoginifo.objects.update_or_create(ip=item,hostname=is_net[0],sn=is_net[1],mathine_type="Network device")
+            else:
+                HostLoginifo.objects.update_or_create(ip=item,ssh_port=key_not_login_list[item][0],ssh_status=0)
+                other_sn = item.replace('.','')
+                ob = OtherMachineInfo.objects.filter(sn_key=other_sn)
+                if not ob:
+                    print ".........................OtherMachineInfo",item,other_sn
+                    OtherMachineInfo.objects.create(ip=item,sn_key=other_sn,reson_str=u"SSH端口存活，无法登录",oth_cab_id=1)
 
+
+    if unkown_list:
+        for item in unkown_list:
+            is_net = nm.query(item)
+            if is_net[0] or is_net[1]:
+                HostLoginifo.objects.update_or_create(ip=item,hostname=is_net,mathine_type="Network device")
+            else:
+                HostLoginifo.objects.update_or_create(ip=item,ssh_status=0)
+                other_sn = item.replace('.','')
+                ob = OtherMachineInfo.objects.filter(sn_key=other_sn)
+                if not ob:
+                    OtherMachineInfo.objects.create(ip=item,sn_key=other_sn,reson_str=u"IP存活，非Linux服务器",oth_cab_id=1)
+
+    '''
+    网络设备备份或者登录功能
+    '''
+    net_login_dct = {}
+    with open("%s/conf/net_dev.pass"%BASE_DIR,'r') as f:
+        for item in f.readlines():
+            ip,username,passwd,en_passwd = re.split("\s+",item)[:4]
+            net_login_dct[ip] = (username,passwd,en_passwd)
+        if n_login_sw == "True":
+            res = NetDevLogin(dev_ips=net_login_dct,backup_sw=n_backup_sw,back_server=n_backup_sever)
 
 
 
@@ -163,32 +164,32 @@ def main():
     '''
     ne = NmapVMX(vmware_p_list,ip_key_dic)
     ne.dosnmp()
-    #
-    # '''
-    # 更新状态表，用户信息表
-    # '''
-    # c_sn_lst = [item.sn_key for item in ConnectionInfo.objects.all()]
-    # o_sn_lst = [item.sn_key for item in OtherMachineInfo.objects.all()]
-    # old_sn_list = [item.sn_key for item in MachineOperationsInfo.objects.all()]
-    # new_sn_lst = c_sn_lst + o_sn_lst
-    # diff_sn_lst = set(new_sn_lst + old_sn_list)
-    #
-    # for item in diff_sn_lst:
-    #     try:
-    #         nsin = MachineOperationsInfo.objects.filter(sn_key=item)
-    #         if not nsin:
-    #             MachineOperationsInfo.objects.create(sn_key=item)
-    #     except Exception as e:
-    #         print "Error:SN:%s not insert into database,reason is:%s"%(item,e)
-    #         logger.error("Error:SN:%s not insert into database,reason is:%s"%(item,e))
-    #
-    # '''
-    # 统计总数
-    # '''
-    # info_dic = Machines().get_all_count()
-    # StatisticsRecord.objects.create(all_count=info_dic['all_c'],pyh_count=info_dic['pyh_c'],net_count=info_dic['net_c'],
-    #                                 other_count=info_dic['other_c'],vmx_count=info_dic['vmx_c'],kvm_count=info_dic['kvm_c'],docker_count=info_dic['docker_c'])
-    #
+
+    '''
+    更新状态表，用户信息表
+    '''
+    c_sn_lst = [item.sn_key for item in ConnectionInfo.objects.all()]
+    o_sn_lst = [item.sn_key for item in OtherMachineInfo.objects.all()]
+    old_sn_list = [item.sn_key for item in MachineOperationsInfo.objects.all()]
+    new_sn_lst = c_sn_lst + o_sn_lst
+    diff_sn_lst = set(new_sn_lst + old_sn_list)
+
+    for item in diff_sn_lst:
+        try:
+            nsin = MachineOperationsInfo.objects.filter(sn_key=item)
+            if not nsin:
+                MachineOperationsInfo.objects.create(sn_key=item)
+        except Exception as e:
+            print "Error:SN:%s not insert into database,reason is:%s"%(item,e)
+            logger.error("Error:SN:%s not insert into database,reason is:%s"%(item,e))
+
+    '''
+    统计总数
+    '''
+    info_dic = Machines().get_all_count()
+    StatisticsRecord.objects.create(all_count=info_dic['all_c'],pyh_count=info_dic['pyh_c'],net_count=info_dic['net_c'],
+                                    other_count=info_dic['other_c'],vmx_count=info_dic['vmx_c'],kvm_count=info_dic['kvm_c'],docker_count=info_dic['docker_c'])
+
 
 
     endtime = datetime.datetime.now()
