@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from django.db import models
+#import django.utils.timezone as timezone
 
 # Create your models here.
 
@@ -30,6 +31,15 @@ class HostLoginifo(models.Model):
         verbose_name_plural = verbose_name
         db_table = "hostloginifo"
 
-
-
+#摄像机列表，目前包含：摄像机IP地址，在线状态
+class Cameraifo(models.Model):
+    ip = models.CharField(max_length=64,null=False,verbose_name="摄像机IP信息")
+    zone = models.CharField(max_length=256, null=True, verbose_name="摄像机所属区域")
+    name = models.CharField(max_length=256,null=True,verbose_name="摄像机名称")
+    status = models.BooleanField(default=False,verbose_name="摄像机在线状态")
+    here = models.CharField(max_length=256, null=True, verbose_name="摄像机名称")
+    class Meta:
+        verbose_name = u'摄像机列表'
+        verbose_name_plural = verbose_name
+        db_table = "cameraifo"
 

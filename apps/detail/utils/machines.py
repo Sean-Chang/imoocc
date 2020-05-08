@@ -2,7 +2,7 @@
 from django.db.models import Q
 from detail.models import *
 from operations.models import *
-
+from scanhosts.models import *
 
 class Machines(object):
     """设备查询过滤"""
@@ -14,6 +14,9 @@ class Machines(object):
 
     def filter_machines(self, obj, pk=None):
         return obj.objects.filter(id=pk)
+
+    def filter_cameras(self, obj, status = True):
+        return  obj.objects.filter(status = status)
 
     def filter_phy_servers(self, ID=None, SN=None, Vir_Type=None):
         return PhysicalServerInfo.objects.filter(Q(id=ID) | Q(sn=SN) | Q(vir_type=Vir_Type))
@@ -29,6 +32,7 @@ class Machines(object):
 
     def get_all_count(self):
         res = {}
+        res['cam_c'] = self.all_machines(Cameraifo).count()
         res['pyh_c'] = self.all_machines(PhysicalServerInfo).count()
         res['net_c'] = self.all_machines(NetWorkInfo).count()
         res['other_c'] = self.all_machines(OtherMachineInfo).count()

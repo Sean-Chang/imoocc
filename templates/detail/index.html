@@ -67,6 +67,9 @@
                             <div id="list-group-1" class="collapse in list-group-div" style="text-indent: 3px;">
                                 <ul class="list-group">
                                     <li class="list-group-item">
+                                        <a href="#model00"><span class="glyphicon glyphicon-book"></span> 摄像机概览</a>
+                                    </li>
+                                    <li class="list-group-item">
                                         <a href="#model01"><span class="glyphicon glyphicon-book"></span> 机房机柜概览</a>
                                     </li>
                                     <li class="list-group-item">
@@ -193,6 +196,33 @@
                     </div>
                     <div style="padding: 15px;"></div>
 
+                    <table id="model00" class="table table-bordered table-hover table-striped" style="">
+                        <thead>
+                            <th colspan="5" style="background:#E3E3E3;">
+                                <h4 style="text-align: center;">摄像机信息概览</h4>
+                            </th>
+                            <tr>
+                                <td width="20%">序号</td>
+                                <td width="30%">设备总数</td>
+                                <td colspan="2" width="30%">在线情况</td>
+                                <td width="20%">查看</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="">
+                                <td rowspan="2" style="line-height:56px">1</td>
+                                <td rowspan="2" style="line-height:56px">{{cabinets | length }}</td>
+                                <td rowspan="1">总数</td>
+                                <td rowspan="1">在线数量</td>
+<!--                                <td></td>-->
+                                <td rowspan="2" style="line-height:56px"><a href="/list/?type=cm&p=1">全部</a></td>
+                            </tr>
+                            <tr>
+                                <td rowspan="1"><a href="/classify/?type=esx&p=1">{{cameras.count}}</a></td>
+                                <td rowspan="1"><a href="/classify/?type=oth&p=1">{{cameras_on.count}}</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
                     <table id="model01" class="table table-bordered table-hover table-striped" style="">
                         <thead>
                             <th colspan="5" style="background:#E3E3E3;">

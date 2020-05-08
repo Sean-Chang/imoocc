@@ -12,6 +12,8 @@ from .utils.handdles import *
 def index(request):
     """首页"""
     machines = Machines()
+    cameras = machines.all_machines(Cameraifo)
+    cameras_on = machines.filter_cameras(Cameraifo,True)
     cabinets = machines.all_machines(CabinetInfo)
     phy_servers = machines.all_machines(PhysicalServerInfo)
     vir_servers = machines.all_machines(VirtualServerInfo)
@@ -20,7 +22,7 @@ def index(request):
     server_classify = ServersClassify()
     phy_classify = server_classify.phy_classify(phy_servers)
     vir_classify = server_classify.vir_classify(vir_servers)
-    context = {'title': "首页", 'platform': '1', 'cabinets': cabinets, 'networks': networks,
+    context = {'title': "首页", 'platform': '1', 'cameras':cameras, 'cameras_on' : cameras_on, 'cabinets': cabinets, 'networks': networks,
                'othermachines': othermachines, 'phy_classify': phy_classify, 'vir_classify': vir_classify}
     return render(request, 'detail/index.html', context)
 
@@ -31,7 +33,10 @@ def machine_list(request):
     sn_states = SnStates().sn_states()
     types = request.GET.get("type")
     machines = Machines()
-    if types == 'cb':
+    if types == 'cm':
+        paginator = Paginator(machines.all_machines(Cameraifo), 10)
+        template = "detail/cam_list.html"
+    elif types == 'cb':
         paginator = Paginator(machines.all_machines(CabinetInfo), 10)
         template = "detail/cab_list.html"
     elif types == 'p':

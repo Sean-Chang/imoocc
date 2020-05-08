@@ -1,0 +1,43 @@
+{%extends 'base.html'%}
+{%block head%}
+<style>
+    table th {
+        text-align: left;
+    }
+</style>
+{%endblock head%}
+
+{%block body%}
+<table id="model01" class="table table-bordered table-hover table-striped">
+    <thead>
+    <th colspan="8" style="background:#E3E3E3;">
+        <h4 style="background:#E3E3E3; text-align:center; font-weight:bold">摄像机主要信息概览</h4>
+    </th>
+    <tr>
+        <th>ID</th>
+        <th>设备ip</th>
+        <th>网络设备名</th>
+        <th>所属区域</th>
+        <th>在线状态</th>
+        <th>更新时间</th>
+        <th>备注</th>
+        <th>查看</th>
+    </tr>
+    </thead>
+    <tbody>
+    {%for cameras in page%}
+    <tr>
+        <td>{{cameras.id}}</td>
+        <td>{{cameras.ip}}</td>
+        <td>{{cameras.name}}</td>
+        <td>{{cameras.zone}}</td>
+<!--        <td class="state" data-value="{{network.sn}}">{{network.sn}}</td>-->
+        <td>{{cameras.status}}</td>
+        <td></td>
+        <td></td>
+        <td><a href="/detail_n/?dID={{network.id}}" target="_blank">详细</a></td>
+    </tr>
+    {%endfor%}
+    </tbody>
+</table>
+{%endblock body%}

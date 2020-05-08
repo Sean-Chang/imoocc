@@ -21,4 +21,4 @@ def histogram(request):
 def rack(request):
     """机柜布置图"""
     context = {'title': '机柜布置图'}
-    return render(request, 'reports/rack.html', context)
+    return render(request, 'reports/rack1.html', context)

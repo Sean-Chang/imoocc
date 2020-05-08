@@ -200,7 +200,8 @@ class NmapDev(object):
             system_info = ""
             for password in password_list:
                 if ip not in self.can_login_lst.keys():
-                    login_info = (ip,int(port),'root', password)
+                    login_info = (ip,int(port),'zxf', password)#修改ssh登录名称
+                    print "登录名修改为zxf"
                     doobj = J_ssh_do(login_info)
                     res = doobj.pass_do(login_info,syscmd_list)
                     if res["status"] == "success":
@@ -331,7 +332,7 @@ class NmapDev(object):
                                     self.key_not_login_lst[ip] = (port,keyfile)
         return  self.can_key_login_lst,self.key_not_login_lst
 
-
+#交换机
 class NmapNet:
     def __init__(self,sysname_oid="",sn_oid="",community=""):
         self.community = community

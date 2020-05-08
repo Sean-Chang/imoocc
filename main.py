@@ -18,7 +18,7 @@ import django
 import time
 django.setup()
 
-from scanhosts.models import HostLoginifo
+from scanhosts.models import HostLoginifo,Cameraifo
 from scanhosts.util.nmap_all_server import NmapNet
 from scanhosts.util.nmap_all_server import NmapDocker
 from scanhosts.util.nmap_all_server import NmapKVM
@@ -83,6 +83,7 @@ def main():
     nm = NmapNet(n_sysname_oid,n_sn_oid,n_commu)
     if key_not_login_list:
         for item in key_not_login_list:
+            #print ">>>>>>>>>>>>>>>>>",item
             is_net = nm.query(item)
             if is_net[0] or is_net[1]:
                 HostLoginifo.objects.update_or_create(ip=item,hostname=is_net[0],sn=is_net[1],mathine_type="Network device")
@@ -98,6 +99,7 @@ def main():
     if unkown_list:
         for item in unkown_list:
             is_net = nm.query(item)
+            #print ">>>>>>>>>>>>>>>>>is_net", item
             if is_net[0] or is_net[1]:
                 HostLoginifo.objects.update_or_create(ip=item,hostname=is_net,mathine_type="Network device")
             else:
@@ -106,6 +108,14 @@ def main():
                 ob = OtherMachineInfo.objects.filter(sn_key=other_sn)
                 if not ob:
                     OtherMachineInfo.objects.create(ip=item,sn_key=other_sn,reson_str=u"IP存活，非Linux服务器",oth_cab_id=1)
+
+    all_cam = Cameraifo.objects.all()
+    for item in all_cam:
+        if item.ip in unkown_list:
+            Cameraifo.objects.filter(ip = item.ip).update(status = True)
+        else:
+            Cameraifo.objects.filter(ip=item.ip).update(status=False)
+
 
     '''
     网络设备备份或者登录功能

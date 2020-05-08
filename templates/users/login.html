@@ -25,8 +25,7 @@
                 uname_ok = false;
             }else{
                 $uname.next().hide();
-                uname_ok = true;
-            }
+                =name_ok = true;}
         });
 
         $upwd.blur(function(){
@@ -60,7 +59,7 @@
 </script>
 {%endblock head%}
 
-{%block body%}
+··1
 <div class="form-horizontal col-sm-offset-4" style="padding-top:100px;padding-bottom: 100px;">
     <form action="/user/login_haddle/" method="post">
         {%csrf_token%}

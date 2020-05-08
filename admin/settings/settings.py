@@ -36,7 +36,7 @@ ALLOWED_HOSTS = ['*']
 
 
 # Application definition
-
+#需要运行的应用要放进去，django开头的为系统默认应用，其余为新建  zxf
 INSTALLED_APPS = (
     'django_crontab',
     'django.contrib.admin',
@@ -74,7 +74,7 @@ ROOT_URLCONF = 'admin.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],#将所有的模板文件放入到一个名为templates的文件夹中 zxf
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
